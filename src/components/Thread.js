@@ -1,5 +1,5 @@
 import "../scss/App.scss";
-function Thread() {
-  return <div className="thread">thread</div>;
+function Thread(props) {
+  return <div className="thread">{props.post}</div>;
 }
 export default Thread;

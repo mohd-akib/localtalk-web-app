@@ -1,8 +1,14 @@
 import "../scss/App.scss";
-function TopHeader() {
+
+function TopHeader(props) {
   return (
     <div className="topHeader">
-      <button className="button button--newthread">Start a new Thread </button>
+      <button
+        className="button button--newthread"
+        onClick={props.newThreadButtonClickHandler}
+      >
+        Start a new Thread
+      </button>
     </div>
   );
 }
