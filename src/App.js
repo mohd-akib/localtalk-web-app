@@ -1,40 +1,40 @@
-import logo from "./logo.svg";
 import "./scss/App.scss";
 import Sidebar from "./components/Sidebar";
 import TopHeader from "./components/TopHeader";
 import Main from "./components/Main";
 import RightPan from "./components/RightPan";
 import Modal from "./components/Modal";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [shouldModalPopUp, setShouldModalPopUp] = useState(false);
-  const [allThreads, setAllThreads] = useState([{ post: "" }]);
+  const [newPost, setNewPost] = useState();
   function handleNewThreadButtonClick() {
     setShouldModalPopUp(true);
   }
   function handleCloseButtonClick() {
     setShouldModalPopUp(false);
   }
-  function onPostSubmitHandler(event) {
-    event.preventDefault();
-    console.log(event);
-    setAllThreads([{ post: event.target.value }, ...allThreads]);
+
+  function onPostSubmitHandler(newPost) {
+    console.log("before preventDefault");
+    setNewPost(newPost);
+    handleCloseButtonClick();
   }
   return (
     <div className="App">
-      <Sidebar key={1} />
+      {/* <Sidebar key={1} /> */}
       <TopHeader
         newThreadButtonClickHandler={handleNewThreadButtonClick}
         key={2}
       />
-      <Main key={3} allThreads={allThreads} />
-      <RightPan key={4} />
+      <Main newPost={newPost} key={3} />
+      {/* <RightPan key={4} /> */}
       <Modal
         shouldModalPopUp={shouldModalPopUp}
         handleCloseButtonClick={handleCloseButtonClick}
-        key={5}
         onPostSubmitHandler={onPostSubmitHandler}
+        key={5}
       />
     </div>
   );
